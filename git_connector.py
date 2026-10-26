@@ -1002,6 +1002,11 @@ class GitConnector(BaseConnector):
             if not search_dir.is_dir():
                 return action_result.set_status(phantom.APP_ERROR, f"Path '{file_path}' does not exist or is not a directory")
             name_regex = param.get("name_regex", "").strip()
+            max_regex_len = 200
+            if len(name_regex) > max_regex_len:
+                return action_result.set_status(
+                    phantom.APP_ERROR, f"name_regex must be {max_regex_len} characters or fewer"
+                )
             compiled_regex = re.compile(name_regex) if name_regex else None
             tracked_files = set(repo.git.ls_files("-z").split("\0"))
             recursive = str(param.get("recursive", False)).lower() == "true"
@@ -1012,8 +1017,10 @@ class GitConnector(BaseConnector):
                     continue
                 if ".git" in item.resolve().relative_to(repo_dir).parts:
                     continue
-                is_directory = item.is_dir()
-                if filter_type == "files" and not item.is_file():
+                is_broken_symlink = item.is_symlink() and not item.exists()
+                is_directory = not is_broken_symlink and item.is_dir()
+                is_file = not is_broken_symlink and item.is_file()
+                if filter_type == "files" and not is_file:
                     continue
                 if filter_type == "directories" and not is_directory:
                     continue
@@ -1022,10 +1029,10 @@ class GitConnector(BaseConnector):
                 entry = {
                     "name": item.name,
                     "path": relative.as_posix(),
-                    "type": "directory" if is_directory else "file",
+                    "type": "broken_symlink" if is_broken_symlink else ("directory" if is_directory else "file"),
                     "tracked": relative.as_posix() in tracked_files,
                 }
-                if item.is_file():
+                if is_file:
                     entry["size_bytes"] = item.stat().st_size
                 files.append(entry)
         except re.error as e:

@@ -153,23 +153,23 @@ PARAMETER | REQUIRED | DESCRIPTION | TYPE | CONTAINS
 
 DATA PATH | TYPE | CONTAINS | EXAMPLE VALUES
 --------- | ---- | -------- | --------------
-action_result.status | string | | |
-action_result.message | string | | |
-action_result.data.\*.repo_name | string | | |
-action_result.data.\*.repo_dir | string | `file path` | |
-action_result.data.\*.search_path | string | | |
-action_result.data.\*.files.\*.name | string | | |
-action_result.data.\*.files.\*.path | string | `file path` | |
-action_result.data.\*.files.\*.type | string | | |
-action_result.data.\*.files.\*.tracked | boolean | | |
-action_result.data.\*.files.\*.size_bytes | numeric | | |
-action_result.summary.total_files | numeric | | |
-action_result.summary.total_directories | numeric | | |
-action_result.parameter.repo_name | string | | |
-action_result.parameter.file_path | string | `file path` | |
-action_result.parameter.recursive | boolean | | |
-action_result.parameter.name_regex | string | | |
-action_result.parameter.filter_type | string | | |
+action_result.status | string | | success failed |
+action_result.message | string | | Found 2 file(s) and 1 directory(s) |
+action_result.data.\*.repo_name | string | | repo2 |
+action_result.data.\*.repo_dir | string | `file path` | /opt/phantom/local_data/app_states/ff116964-86f7-4e29-8763-4462ce0d39a7/test_repo |
+action_result.data.\*.search_path | string | | / |
+action_result.data.\*.files.\*.name | string | | test_file.txt |
+action_result.data.\*.files.\*.path | string | `file path` | test_file.txt |
+action_result.data.\*.files.\*.type | string | | file directory |
+action_result.data.\*.files.\*.tracked | boolean | | True False |
+action_result.data.\*.files.\*.size_bytes | numeric | | 48 |
+action_result.summary.total_files | numeric | | 2 |
+action_result.summary.total_directories | numeric | | 1 |
+action_result.parameter.repo_name | string | | repo2 |
+action_result.parameter.file_path | string | `file path` | / |
+action_result.parameter.recursive | boolean | | True False |
+action_result.parameter.name_regex | string | | .\*\\.txt$ |
+action_result.parameter.filter_type | string | | both |
 summary.total_objects | numeric | | |
 summary.total_objects_successful | numeric | | |
 
@@ -178,7 +178,7 @@ summary.total_objects_successful | numeric | | |
 Retrieve a local repository file as text or save it to the vault
 
 Type: **investigate** <br>
-Read only: **False**
+Read only: **True**
 
 Returns UTF-8 text with any UTF-8 BOM removed. Files containing NUL bytes or invalid UTF-8 are saved to the vault automatically. save_to_vault also saves text files, preserving their original bytes. vault_filename overrides the vault display name.
 
@@ -195,20 +195,20 @@ PARAMETER | REQUIRED | DESCRIPTION | TYPE | CONTAINS
 
 DATA PATH | TYPE | CONTAINS | EXAMPLE VALUES
 --------- | ---- | -------- | --------------
-action_result.status | string | | |
-action_result.message | string | | |
-action_result.data.\*.repo_name | string | | |
-action_result.data.\*.repo_dir | string | `file path` | |
-action_result.data.\*.file_path | string | `file path` | |
-action_result.data.\*.file_name | string | | |
-action_result.data.\*.contents | string | | |
-action_result.data.\*.vault_id | string | `vault id` | |
-action_result.data.\*.vault_filename | string | | |
-action_result.data.\*.is_binary | boolean | | |
-action_result.parameter.repo_name | string | | |
-action_result.parameter.file_path | string | `file path` | |
-action_result.parameter.save_to_vault | boolean | | |
-action_result.parameter.vault_filename | string | | |
+action_result.status | string | | success failed |
+action_result.message | string | | File 'test_file.txt' retrieved successfully |
+action_result.data.\*.repo_name | string | | repo2 |
+action_result.data.\*.repo_dir | string | `file path` | /opt/phantom/local_data/app_states/ff116964-86f7-4e29-8763-4462ce0d39a7/test_repo |
+action_result.data.\*.file_path | string | `file path` | test_file.txt |
+action_result.data.\*.file_name | string | | test_file.txt |
+action_result.data.\*.contents | string | | Hello world |
+action_result.data.\*.vault_id | string | `vault id` | 75881c96a30cd1f07d596059388368836b6b1b74 |
+action_result.data.\*.vault_filename | string | | test_file.txt |
+action_result.data.\*.is_binary | boolean | | True False |
+action_result.parameter.repo_name | string | | repo2 |
+action_result.parameter.file_path | string | `file path` | test_file.txt |
+action_result.parameter.save_to_vault | boolean | | True False |
+action_result.parameter.vault_filename | string | | test_file.txt |
 summary.total_objects | numeric | | |
 summary.total_objects_successful | numeric | | |
 
@@ -233,15 +233,15 @@ PARAMETER | REQUIRED | DESCRIPTION | TYPE | CONTAINS
 
 DATA PATH | TYPE | CONTAINS | EXAMPLE VALUES
 --------- | ---- | -------- | --------------
-action_result.status | string | | |
-action_result.message | string | | |
-action_result.data.\*.repo_name | string | | |
-action_result.data.\*.repo_dir | string | `file path` | |
-action_result.data.\*.old_file_path | string | `file path` | |
-action_result.data.\*.new_file_path | string | `file path` | |
-action_result.parameter.repo_name | string | | |
-action_result.parameter.old_file_path | string | `file path` | |
-action_result.parameter.new_file_path | string | `file path` | |
+action_result.status | string | | success failed |
+action_result.message | string | | File 'test_file.txt' renamed to 'test_file_renamed.txt' successfully |
+action_result.data.\*.repo_name | string | | repo2 |
+action_result.data.\*.repo_dir | string | `file path` | /opt/phantom/local_data/app_states/ff116964-86f7-4e29-8763-4462ce0d39a7/test_repo |
+action_result.data.\*.old_file_path | string | `file path` | test_file.txt |
+action_result.data.\*.new_file_path | string | `file path` | test_file_renamed.txt |
+action_result.parameter.repo_name | string | | repo2 |
+action_result.parameter.old_file_path | string | `file path` | test_file.txt |
+action_result.parameter.new_file_path | string | `file path` | test_file_renamed.txt |
 summary.total_objects | numeric | | |
 summary.total_objects_successful | numeric | | |
 

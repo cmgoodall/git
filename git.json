@@ -115,83 +115,158 @@
                     ]
                 }
             },
+            "render": {
+                "width": 12,
+                "height": 5,
+                "type": "table",
+                "title": "List Files"
+            },
             "output": [
                 {
                     "data_path": "action_result.status",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "success",
+                        "failed"
+                    ],
+                    "column_order": 6,
+                    "column_name": "Status"
                 },
                 {
                     "data_path": "action_result.message",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "Found 2 file(s) and 1 directory(s)"
+                    ]
                 },
                 {
                     "data_path": "action_result.data.*.repo_name",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "repo2"
+                    ],
+                    "column_order": 0,
+                    "column_name": "Repo Name"
                 },
                 {
                     "data_path": "action_result.data.*.repo_dir",
                     "data_type": "string",
                     "contains": [
                         "file path"
+                    ],
+                    "example_values": [
+                        "/opt/phantom/local_data/app_states/ff116964-86f7-4e29-8763-4462ce0d39a7/test_repo"
                     ]
                 },
                 {
                     "data_path": "action_result.data.*.search_path",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "/"
+                    ]
                 },
                 {
                     "data_path": "action_result.data.*.files.*.name",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "test_file.txt"
+                    ],
+                    "column_order": 1,
+                    "column_name": "Name"
                 },
                 {
                     "data_path": "action_result.data.*.files.*.path",
                     "data_type": "string",
                     "contains": [
                         "file path"
-                    ]
+                    ],
+                    "example_values": [
+                        "test_file.txt"
+                    ],
+                    "column_order": 2,
+                    "column_name": "Path"
                 },
                 {
                     "data_path": "action_result.data.*.files.*.type",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "file",
+                        "directory"
+                    ],
+                    "column_order": 3,
+                    "column_name": "Type"
                 },
                 {
                     "data_path": "action_result.data.*.files.*.tracked",
-                    "data_type": "boolean"
+                    "data_type": "boolean",
+                    "example_values": [
+                        true,
+                        false
+                    ],
+                    "column_order": 4,
+                    "column_name": "Tracked"
                 },
                 {
                     "data_path": "action_result.data.*.files.*.size_bytes",
-                    "data_type": "numeric"
+                    "data_type": "numeric",
+                    "example_values": [
+                        48
+                    ],
+                    "column_order": 5,
+                    "column_name": "Size (Bytes)"
                 },
                 {
                     "data_path": "action_result.summary.total_files",
-                    "data_type": "numeric"
+                    "data_type": "numeric",
+                    "example_values": [
+                        2
+                    ]
                 },
                 {
                     "data_path": "action_result.summary.total_directories",
-                    "data_type": "numeric"
+                    "data_type": "numeric",
+                    "example_values": [
+                        1
+                    ]
                 },
                 {
                     "data_path": "action_result.parameter.repo_name",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "repo2"
+                    ]
                 },
                 {
                     "data_path": "action_result.parameter.file_path",
                     "data_type": "string",
                     "contains": [
                         "file path"
+                    ],
+                    "example_values": [
+                        "/"
                     ]
                 },
                 {
                     "data_path": "action_result.parameter.recursive",
-                    "data_type": "boolean"
+                    "data_type": "boolean",
+                    "example_values": [
+                        true,
+                        false
+                    ]
                 },
                 {
                     "data_path": "action_result.parameter.name_regex",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        ".*\\.txt$"
+                    ]
                 },
                 {
                     "data_path": "action_result.parameter.filter_type",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "both"
+                    ]
                 },
                 {
                     "data_path": "summary.total_objects",
@@ -210,7 +285,7 @@
             "verbose": "Returns UTF-8 text with any UTF-8 BOM removed. Files containing NUL bytes or invalid UTF-8 are saved to the vault automatically. save_to_vault also saves text files, preserving their original bytes. vault_filename overrides the vault display name.",
             "type": "investigate",
             "identifier": "get_file",
-            "read_only": false,
+            "read_only": true,
             "parameters": {
                 "repo_name": {
                     "description": "Local repository name",
@@ -237,24 +312,47 @@
                     "order": 3
                 }
             },
+            "render": {
+                "width": 12,
+                "height": 5,
+                "type": "table",
+                "title": "Get File"
+            },
             "output": [
                 {
                     "data_path": "action_result.status",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "success",
+                        "failed"
+                    ],
+                    "column_order": 4,
+                    "column_name": "Status"
                 },
                 {
                     "data_path": "action_result.message",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "File 'test_file.txt' retrieved successfully"
+                    ]
                 },
                 {
                     "data_path": "action_result.data.*.repo_name",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "repo2"
+                    ],
+                    "column_order": 0,
+                    "column_name": "Repo Name"
                 },
                 {
                     "data_path": "action_result.data.*.repo_dir",
                     "data_type": "string",
                     "contains": [
                         "file path"
+                    ],
+                    "example_values": [
+                        "/opt/phantom/local_data/app_states/ff116964-86f7-4e29-8763-4462ce0d39a7/test_repo"
                     ]
                 },
                 {
@@ -262,49 +360,87 @@
                     "data_type": "string",
                     "contains": [
                         "file path"
-                    ]
+                    ],
+                    "example_values": [
+                        "test_file.txt"
+                    ],
+                    "column_order": 1,
+                    "column_name": "File Path"
                 },
                 {
                     "data_path": "action_result.data.*.file_name",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "test_file.txt"
+                    ]
                 },
                 {
                     "data_path": "action_result.data.*.contents",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "Hello world"
+                    ]
                 },
                 {
                     "data_path": "action_result.data.*.vault_id",
                     "data_type": "string",
                     "contains": [
                         "vault id"
-                    ]
+                    ],
+                    "example_values": [
+                        "75881c96a30cd1f07d596059388368836b6b1b74"
+                    ],
+                    "column_order": 3,
+                    "column_name": "Vault ID"
                 },
                 {
                     "data_path": "action_result.data.*.vault_filename",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "test_file.txt"
+                    ]
                 },
                 {
                     "data_path": "action_result.data.*.is_binary",
-                    "data_type": "boolean"
+                    "data_type": "boolean",
+                    "example_values": [
+                        true,
+                        false
+                    ],
+                    "column_order": 2,
+                    "column_name": "Is Binary"
                 },
                 {
                     "data_path": "action_result.parameter.repo_name",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "repo2"
+                    ]
                 },
                 {
                     "data_path": "action_result.parameter.file_path",
                     "data_type": "string",
                     "contains": [
                         "file path"
+                    ],
+                    "example_values": [
+                        "test_file.txt"
                     ]
                 },
                 {
                     "data_path": "action_result.parameter.save_to_vault",
-                    "data_type": "boolean"
+                    "data_type": "boolean",
+                    "example_values": [
+                        true,
+                        false
+                    ]
                 },
                 {
                     "data_path": "action_result.parameter.vault_filename",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "test_file.txt"
+                    ]
                 },
                 {
                     "data_path": "summary.total_objects",
@@ -349,24 +485,47 @@
                     ]
                 }
             },
+            "render": {
+                "width": 12,
+                "height": 5,
+                "type": "table",
+                "title": "Rename File"
+            },
             "output": [
                 {
                     "data_path": "action_result.status",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "success",
+                        "failed"
+                    ],
+                    "column_order": 3,
+                    "column_name": "Status"
                 },
                 {
                     "data_path": "action_result.message",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "File 'test_file.txt' renamed to 'test_file_renamed.txt' successfully"
+                    ]
                 },
                 {
                     "data_path": "action_result.data.*.repo_name",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "repo2"
+                    ],
+                    "column_order": 0,
+                    "column_name": "Repo Name"
                 },
                 {
                     "data_path": "action_result.data.*.repo_dir",
                     "data_type": "string",
                     "contains": [
                         "file path"
+                    ],
+                    "example_values": [
+                        "/opt/phantom/local_data/app_states/ff116964-86f7-4e29-8763-4462ce0d39a7/test_repo"
                     ]
                 },
                 {
@@ -374,24 +533,40 @@
                     "data_type": "string",
                     "contains": [
                         "file path"
-                    ]
+                    ],
+                    "example_values": [
+                        "test_file.txt"
+                    ],
+                    "column_order": 1,
+                    "column_name": "Old File Path"
                 },
                 {
                     "data_path": "action_result.data.*.new_file_path",
                     "data_type": "string",
                     "contains": [
                         "file path"
-                    ]
+                    ],
+                    "example_values": [
+                        "test_file_renamed.txt"
+                    ],
+                    "column_order": 2,
+                    "column_name": "New File Path"
                 },
                 {
                     "data_path": "action_result.parameter.repo_name",
-                    "data_type": "string"
+                    "data_type": "string",
+                    "example_values": [
+                        "repo2"
+                    ]
                 },
                 {
                     "data_path": "action_result.parameter.old_file_path",
                     "data_type": "string",
                     "contains": [
                         "file path"
+                    ],
+                    "example_values": [
+                        "test_file.txt"
                     ]
                 },
                 {
@@ -399,6 +574,9 @@
                     "data_type": "string",
                     "contains": [
                         "file path"
+                    ],
+                    "example_values": [
+                        "test_file_renamed.txt"
                     ]
                 },
                 {
