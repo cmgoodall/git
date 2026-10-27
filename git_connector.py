@@ -1004,9 +1004,7 @@ class GitConnector(BaseConnector):
             name_regex = param.get("name_regex", "").strip()
             max_regex_len = 200
             if len(name_regex) > max_regex_len:
-                return action_result.set_status(
-                    phantom.APP_ERROR, f"name_regex must be {max_regex_len} characters or fewer"
-                )
+                return action_result.set_status(phantom.APP_ERROR, f"name_regex must be {max_regex_len} characters or fewer")
             compiled_regex = re.compile(name_regex) if name_regex else None
             tracked_files = set(repo.git.ls_files("-z").split("\0"))
             recursive = str(param.get("recursive", False)).lower() == "true"
